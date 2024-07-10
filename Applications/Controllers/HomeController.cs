@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RiwiEmplea.Models;
 
-namespace RiwiEmplea.Controllers
+namespace RiwiEmplea.Applications.Controllers.Users
 {
     public class HomeController : Controller
     {
