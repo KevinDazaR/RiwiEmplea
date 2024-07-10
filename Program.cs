@@ -3,10 +3,10 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using RiwiEmplea.Applications.Interfaces.Repositories.Token;
-using RiwiEmplea.Applications.Services.Token;
-using RiwiEmplea.Data;
+using RiwiEmplea.Applications.Interfaces;
+using RiwiEmplea.Applications.Services.Repositories;
+using RiwiEmplea.Applications.Utils.Profiles;
+using RiwiEmplea.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,6 +55,18 @@ builder.Services.AddAuthentication(opt => {
                 }
             };
         });
+// Configuration of the interfaces that will be used
+builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+builder.Services.AddLogging();  // Añade el servicio de logging
+
+
+
+// Register AutoMapper profiles
+builder.Services.AddAutoMapper(typeof(UsersProfile));
+
+// Configuration of controllers
+builder.Services.AddControllers();
+
 
 var app = builder.Build();
 
@@ -77,5 +89,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllers();
 
 app.Run();

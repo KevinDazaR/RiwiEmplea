@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using RiwiEmplea.Models;
 
-namespace RiwiEmplea.Data
+namespace RiwiEmplea.Infrastructure.Data
 {
     public class BaseContext(DbContextOptions<BaseContext> options): DbContext(options)
     {
