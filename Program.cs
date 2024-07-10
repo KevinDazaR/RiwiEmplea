@@ -19,14 +19,11 @@ builder.Services.AddDbContext<BaseContext>(options =>
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddLogging();  // Añade el servicio de logging
 
-
-
 // Register AutoMapper profiles
 builder.Services.AddAutoMapper(typeof(UsersProfile));
 
 // Configuration of controllers
 builder.Services.AddControllers();
-
 
 var app = builder.Build();
 
@@ -48,7 +45,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Register}/{action=Index}");
 
 app.MapControllers();
 
