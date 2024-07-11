@@ -1,9 +1,11 @@
+using CouponsV2.Application.Services.Emails;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using RiwiEmplea.Applications.Interfaces;
 using RiwiEmplea.Applications.Services.Repositories;
 using RiwiEmplea.Applications.Utils.Profiles;
 using RiwiEmplea.Infrastructure.Data;
+using RiwiEmplea.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +19,11 @@ builder.Services.AddDbContext<BaseContext>(options =>
 
 // Configuration of the interfaces that will be used
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+builder.Services.AddScoped<IEmailRepository, EmailRepository>();
 builder.Services.AddLogging();  // Añade el servicio de logging
 
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddTransient<IEmailRepository, EmailRepository>();
 
 
 // Register AutoMapper profiles
@@ -26,7 +31,6 @@ builder.Services.AddAutoMapper(typeof(UsersProfile));
 
 // Configuration of controllers
 builder.Services.AddControllers();
-
 
 var app = builder.Build();
 
@@ -48,7 +52,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Register}/{action=Index}");
 
 app.MapControllers();
 

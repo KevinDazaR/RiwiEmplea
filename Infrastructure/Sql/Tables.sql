@@ -8,6 +8,9 @@ CREATE TABLE Users (
     Foreign Key (RoleId) REFERENCES Roles(Id)
 );
 
+ALTER TABLE Users ADD LastName VARCHAR(45);
+
+
 
 CREATE TABLE Resume (
     Id INTEGER AUTO_INCREMENT PRIMARY KEY,

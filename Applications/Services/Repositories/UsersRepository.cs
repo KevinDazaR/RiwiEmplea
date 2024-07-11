@@ -17,11 +17,14 @@ namespace RiwiEmplea.Applications.Services.Repositories
         private readonly IMapper _mapper;
         private readonly ILogger<UsersRepository> _logger;
 
-        public UsersRepository(BaseContext context, IMapper mapper, ILogger<UsersRepository> logger)
+         private readonly IEmailRepository _emailRepository;
+
+        public UsersRepository(BaseContext context, IMapper mapper, ILogger<UsersRepository> logger, IEmailRepository emailRepository)
         {
             _context = context;
             _mapper = mapper;
             _logger = logger;
+            _emailRepository = emailRepository;
         }
 
         public async Task<IEnumerable<User>> GetAllUsersAsync()
@@ -50,11 +53,18 @@ namespace RiwiEmplea.Applications.Services.Repositories
             {
                 Name = userDTO.Name,
                 Email = userDTO.Email,
-                Password = userDTO.Password
+                Password = userDTO.Password,
+                RoleId = userDTO.RoleId
             };
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
+            var mensajeCustomer = "Usuario creado con èxito!";
+
+             var subject = "RiwiEmplea - Usuario creado!";
+                    var emailCustomer = user.Email;
+
+                    await _emailRepository.SendEmailAsync(emailCustomer, subject, mensajeCustomer);
             return user;
         }
 
