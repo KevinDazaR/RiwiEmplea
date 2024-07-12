@@ -20,3 +20,7 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+#search-input{
+  width: 20% !important;
+}
