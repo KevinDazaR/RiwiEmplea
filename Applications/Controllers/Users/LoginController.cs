@@ -23,6 +23,7 @@ namespace RiwiEmplea.Applications.Controllers.Users
         [HttpPost]
         public async Task<IActionResult> Index([FromForm] User user)
         {
+            /* Organizar mas adelante */
             var usuario = _context.Users.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
             if (usuario != null)
             {
