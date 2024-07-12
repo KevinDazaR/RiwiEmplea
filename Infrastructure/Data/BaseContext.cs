@@ -10,6 +10,6 @@ namespace RiwiEmplea.Infrastructure.Data
         public DbSet<User> Users { get; set; }
         public DbSet<WorkExperience> WorkExperiences { get; set; }
         public DbSet<Resume> Resumes { get; set; }
-        public DbSet<AcademicTrainings> AcademicTraining { get; set; }
+        public DbSet<AcademicTraining> AcademicTrainings { get; set; }
     }
 }
