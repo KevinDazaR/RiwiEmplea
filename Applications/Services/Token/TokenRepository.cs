@@ -30,7 +30,10 @@ namespace RiwiEmplea.Applications.Services.Token
             
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email)
+                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                new Claim("email", user.Email),
+                new Claim("roleId", user.RoleId.ToString()),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
             var tokenOptions = new SecurityTokenDescriptor

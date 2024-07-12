@@ -3,8 +3,11 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using RiwiEmplea.Applications.Interfaces;
+using RiwiEmplea.Applications.Interfaces.Repositories.Token;
 using RiwiEmplea.Applications.Services.Repositories;
+using RiwiEmplea.Applications.Services.Token;
 using RiwiEmplea.Applications.Utils.Profiles;
 using RiwiEmplea.Infrastructure.Data;
 
