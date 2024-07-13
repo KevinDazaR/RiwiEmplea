@@ -1,12 +1,13 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using RiwiEmplea.Applications.Interfaces;
 using RiwiEmplea.Applications.Interfaces.Repositories;
 using RiwiEmplea.Infrastructure.Data;
 using RiwiEmplea.Models;
 
 namespace RiwiEmplea.Applications.Services.Repositories
 {
-  public class AcademicTrainingRepository: IAcademicTrainingRepository
+  public class AcademicTrainingRepository: IAcademicTrainingRepository, IEntryState<AcademicTraining>
   {
     private readonly BaseContext _context;
     private readonly IMapper _mapper;
@@ -38,6 +39,17 @@ namespace RiwiEmplea.Applications.Services.Repositories
       _context.Entry(academicTraining).State = EntityState.Modified;
       await _context.SaveChangesAsync();
       return academicTraining;
+    }
+
+    private AcademicTraining GetAcademicTrainingById(int trainingId)
+    {
+      return _context.AcademicTrainings.FirstOrDefault(x => x.Id == trainingId);
+    }
+
+    public bool ExistEntryInDb(AcademicTraining academicTraining)
+    {
+      AcademicTraining training = GetAcademicTrainingById(academicTraining.Id);
+      return !(training == null); 
     }
   }
 }

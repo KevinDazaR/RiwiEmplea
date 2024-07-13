@@ -31,7 +31,7 @@ INSERT INTO Skills (ResumeId, Skill, Level) VALUES
 
 -- Tabla WorkExperiences
 INSERT INTO WorkExperiences (ResumeId, Company, Position, StartDate, EndDate, Description) VALUES 
-(1, 'Company A', 'Developer', '2020-01-01', '2022-01-01', 'Developed web applications'),
+(2, 'Company A', 'Developer', '2020-01-01', '2022-01-01', 'Developed web applications'),
 (2, 'Company B', 'Analyst', '2019-02-15', '2021-02-15', 'Analyzed data'),
 (3, 'Company C', 'Designer', '2018-03-25', '2020-03-25', 'Designed websites'),
 (4, 'Company D', 'Manager', '2017-07-30', '2019-07-30', 'Managed projects'),

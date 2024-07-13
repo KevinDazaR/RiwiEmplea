@@ -35,5 +35,27 @@ namespace RiwiEmplea.Applications.Services.Repositories
       await _context.SaveChangesAsync();
       return resume;
     }
+
+    public async Task<Resume> CreateOrGetResumeAsync(int userId)
+    {
+      Resume userResume = await GetUserResumeAsync(userId);
+
+      if(userResume == null)
+       return await CreateNewResume(userId);
+
+      return userResume;
+    }
+
+    private async Task<Resume> CreateNewResume(int userId)
+    {
+      Resume resume = new()
+      {
+        UserId = userId,
+        CreatedAt = DateTime.Now,
+        AboutMy = ""
+      };
+
+      return await AddResumeAsync(resume);
+    }
   }
 }

@@ -19,17 +19,18 @@ CREATE TABLE Resumes (
     PublicLink VARCHAR(50),
     AboutMy TEXT,
     CreatedAt DATETIME,
+    State ENUM('Active', 'Inactive') DEFAULT('Active'),
     Foreign Key (UserId) REFERENCES Users(Id)
 );
 
 CREATE TABLE Skills(
     Id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    ResumeId INTEGER,
+    ResumeId INT,
     Ability VARCHAR(45),
     Level ENUM('Basic', 'Medium', 'Advanced'),
-    Foreign Key (ResumeId) REFERENCES Resume(Id)
+    State ENUM('Active', 'Inactive') DEFAULT('Active'),
+    Foreign Key (ResumeId) REFERENCES Resumes(Id)
 );
-
 
 CREATE TABLE WorkExperiences (
     Id INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -39,20 +40,21 @@ CREATE TABLE WorkExperiences (
     StartDate DATE,
     EndDate DATE,
     Description VARCHAR(60),
-    Foreign Key (ResumeId) REFERENCES Resume(Id)
+    State ENUM('Active', 'Inactive') DEFAULT('Active'),
+    Foreign Key (ResumeId) REFERENCES Resumes(Id)
 );
 
 CREATE TABLE AcademicTrainings (
     Id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    ResumeId INT(11),
+    ResumeId INT,
     Institution VARCHAR(60),
     Title VARCHAR(45),
     StartDate DATE,
     EndDate DATE,
     Description VARCHAR(60),
-    Foreign Key (ResumeId) REFERENCES Resume(Id)
+    State ENUM('Active', 'Inactive') DEFAULT('Active'),
+    Foreign Key (ResumeId) REFERENCES Resumes(Id)
 );
-
 
 CREATE TABLE Roles (
     Id INTEGER AUTO_INCREMENT PRIMARY KEY,

@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using RiwiEmplea.Applications.Interfaces;
 using RiwiEmplea.Applications.Interfaces.Repositories;
 using RiwiEmplea.Applications.Services.Repositories;
+using RiwiEmplea.Applications.Services.Repositories.PersonalData;
+using RiwiEmplea.Applications.Services.Repositories.PersonalData.Methods;
 using RiwiEmplea.Applications.Utils.Profiles;
 using RiwiEmplea.Infrastructure.Data;
 using RiwiEmplea.Models;
@@ -30,6 +32,7 @@ builder.Services.AddScoped<IAcademicTrainingRepository, AcademicTrainingReposito
 builder.Services.AddScoped<IWorkExpirenceRepository, WorkExpirenceRepository>();
 builder.Services.AddScoped<ISkillsRepository, SkillsRepository>();
 
+builder.Services.RegisterPersonalData();
 builder.Services.AddScoped<IPersonalDataService, PersonalDataService>();
 
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));

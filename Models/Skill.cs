@@ -11,5 +11,6 @@ namespace RiwiEmplea.Models
         public int ResumeId { get; set; }
         public string? Ability { get; set; }
         public string? Level { get; set; }
+        public string? State { get; set; }
     }
 }

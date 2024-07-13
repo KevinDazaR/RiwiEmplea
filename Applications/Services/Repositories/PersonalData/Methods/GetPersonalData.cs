@@ -1,22 +1,18 @@
 using RiwiEmplea.Applications.Interfaces;
 using RiwiEmplea.Applications.Interfaces.Repositories;
 using RiwiEmplea.Dtos.PersonalData;
-using RiwiEmplea.Dtos.Users;
-using RiwiEmplea.Infrastructure.Data;
 using RiwiEmplea.Models;
 
-namespace RiwiEmplea.Applications.Services.Repositories
+namespace RiwiEmplea.Applications.Services.Repositories.PersonalData.Methods
 {
-  public class PersonalDataService: IPersonalDataService
+  public class GetPersonalData: IGetPersonalData
   {
-    private readonly BaseContext _context;
     private readonly IUsersRepository _usersRepository;
     private readonly IResumeRepository _resumeRepository;
     private readonly IAcademicTrainingRepository _academicTraining;
     private readonly IWorkExpirenceRepository _workExpirenceRepository;
     private readonly ISkillsRepository _skillsRepository;
-    public PersonalDataService(
-      BaseContext context,
+    public GetPersonalData(
       IUsersRepository usersRepository,
       IResumeRepository resumeRepository,
       IAcademicTrainingRepository academicTrainingRepository,
@@ -24,15 +20,12 @@ namespace RiwiEmplea.Applications.Services.Repositories
       ISkillsRepository skillsRepository
     )
     {
-      _context = context;
       _usersRepository = usersRepository;
       _resumeRepository = resumeRepository;
       _academicTraining = academicTrainingRepository;
       _workExpirenceRepository = workExpirenceRepository;
       _skillsRepository = skillsRepository;
     }
-
-    public string GetPublicUrl() => throw new NotImplementedException();
     public async Task<PersonalDataDTO> GetPersonalDataAsync(int userId)
     {
 
@@ -54,9 +47,7 @@ namespace RiwiEmplea.Applications.Services.Repositories
       PersonalDataDTO userInfo = new();
       userInfo.AcademicTrainings = await _academicTraining.GetUserAcademicTrainingsAsync(1);
       return userInfo;
-      // throw new NotImplementedException();
     }
-    public Task<PersonalDataDTO> UpdatePersonalDataAsync(PersonalDataDTO userInfo) => throw new NotImplementedException();
 
     private PersonalDataDTO UserWithoutResume(User user) 
       => new() { FullName = user.Name };
@@ -73,5 +64,5 @@ namespace RiwiEmplea.Applications.Services.Repositories
       };
       return userInfo;
     }
-    }
+  }
 }

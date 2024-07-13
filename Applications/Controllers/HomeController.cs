@@ -29,4 +29,5 @@ namespace RiwiEmplea.Applications.Controllers.Users
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+    }
 }
