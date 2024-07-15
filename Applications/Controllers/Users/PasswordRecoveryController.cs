@@ -1,49 +1,63 @@
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RiwiEmplea.Applications.Interfaces;
+using RiwiEmplea.Applications.Services.Repositories;
+using RiwiEmplea.Dtos.Users;
 using RiwiEmplea.Models;
+using System.Threading.Tasks;
 
-namespace RiwiEmplea.Controllers.Users
+namespace RiwiEmplea.Applications.Controllers.Users
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class PasswordRecoveryController : ControllerBase
+    public class PasswordRecoveryController : Controller
     {
         private readonly IEmailRepository _emailRepository;
+        private readonly IUsersRepository _userRepository;
+        private readonly ILogger<PasswordRecoveryController> _logger;
 
-        public PasswordRecoveryController(IEmailRepository emailRepository)
+        public PasswordRecoveryController(IEmailRepository emailRepository, IUsersRepository userRepository, ILogger<PasswordRecoveryController> logger)
         {
             _emailRepository = emailRepository;
+            _userRepository = userRepository;
+            _logger = logger;
         }
 
-        [HttpPost("forgot-password")]
-        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest model)
+        // Acción para mostrar el formulario de recuperación de contraseña
+        [HttpGet]
+        public IActionResult ForgotPassword()
         {
-            // Genera el token de recuperación de contraseña y la URL
-            var resetToken = "generate-reset-token"; // Implementa la lógica para generar el token
-            var resetUrl = Url.Action("ResetPassword", "PasswordRecovery", new { token = resetToken }, Request.Scheme);
-
-            // Envía el correo electrónico de recuperación de contraseña
-            await _emailRepository.SendEmailAsync(model.Email, "Password Recovery", $"Please reset your password by clicking <a href='{resetUrl}'>here</a>.");
-
-            return Ok(new { Message = "Password recovery email sent." });
+            return View();
         }
 
-        [HttpPost("reset-password")]
-        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest model)
+        // Acción para manejar el envío del formulario
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordDto forgotPasswordDto)
         {
-            return Ok(new { Message = "Password has been reset." });
+            if (ModelState.IsValid)
+            {
+                var user = await _userRepository.GetUserByEmailAsync(forgotPasswordDto.Email);
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "User not found.");
+                    return View(forgotPasswordDto);
+                }
+
+                var password = user.Password;
+                var subject = "Recuperación de contraseña";
+                var body = $"Su contraseña es: {password}";
+
+                await _emailRepository.SendEmailAsync(forgotPasswordDto.Email, subject, body);
+                return RedirectToAction("ForgotPasswordConfirmation");
+            }
+
+            return View(forgotPasswordDto);
         }
-    }
 
-    public class ForgotPasswordRequest
-    {
-        public string Email { get; set; }
-    }
-
-    public class ResetPasswordRequest
-    {
-        public string Token { get; set; }
-        public string NewPassword { get; set; }
+        // Acción para mostrar la confirmación de envío del correo
+        [HttpGet]
+        public IActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
     }
 }
