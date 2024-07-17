@@ -11267,3 +11267,7 @@ nav a{
   color: #5BCCA4 !important;
   margin-left: 20px !important;
 }
+
+#search-input{
+  width: 20% !important;
+}

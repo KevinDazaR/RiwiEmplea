@@ -6,10 +6,10 @@ namespace RiwiEmplea.Applications.Utils.Profiles
 {
     public class UsersProfile : Profile
     {
-         public UsersProfile()
+        public UsersProfile()
         {
-            CreateMap<UsersDTO, User>().ForAllMembers(options => options.Condition((src, dest, srcMember) => srcMember != null));;
+            CreateMap<UsersDTO, User>()
+                .ForMember(dest => dest.RoleId, opt => opt.MapFrom(src => src.RoleId));
         }
     }
 }
-

@@ -16,8 +16,7 @@ namespace RiwiEmplea.Applications.Services.Repositories
         private readonly BaseContext _context;
         private readonly IMapper _mapper;
         private readonly ILogger<UsersRepository> _logger;
-
-         private readonly IEmailRepository _emailRepository;
+        private readonly IEmailRepository _emailRepository;
 
         public UsersRepository(BaseContext context, IMapper mapper, ILogger<UsersRepository> logger, IEmailRepository emailRepository)
         {
@@ -37,36 +36,37 @@ namespace RiwiEmplea.Applications.Services.Repositories
             return await _context.Users.FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<User> CreateUserAsync(UsersDTO userDTO)
-        {
-            if (userDTO == null)
-            {
-                _logger.LogError("userDTO is null");
-                throw new ArgumentNullException(nameof(userDTO));
-            }
+public async Task<User> CreateUserAsync(UsersDTO userDTO)
+{
+    if (userDTO == null)
+    {
+        _logger.LogError("userDTO is null");
+        throw new ArgumentNullException(nameof(userDTO));
+    }
 
-            if (string.IsNullOrEmpty(userDTO.Name)) throw new ArgumentException("Name is required.");
-            if (string.IsNullOrEmpty(userDTO.Email)) throw new ArgumentException("Email is required.");
-            if (string.IsNullOrEmpty(userDTO.Password)) throw new ArgumentException("Password is required.");
+    if (string.IsNullOrEmpty(userDTO.Name)) throw new ArgumentException("Name is required.");
+    if (string.IsNullOrEmpty(userDTO.Email)) throw new ArgumentException("Email is required.");
+    if (string.IsNullOrEmpty(userDTO.Password)) throw new ArgumentException("Password is required.");
 
-            var user = new User
-            {
-                Name = userDTO.Name,
-                Email = userDTO.Email,
-                Password = userDTO.Password,
-                RoleId = userDTO.RoleId
-            };
+    var user = new User
+    {
+        Name = userDTO.Name,
+        Email = userDTO.Email,
+        Password = userDTO.Password,
+        RoleId = userDTO.RoleId  // Asegúrate de que esto esté configurado correctamente
+    };
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-            var mensajeCustomer = "Usuario creado con èxito!";
+    _context.Users.Add(user);
+    await _context.SaveChangesAsync();
+    var mensajeCustomer = "Usuario creado con éxito!";
 
-             var subject = "RiwiEmplea - Usuario creado!";
-                    var emailCustomer = user.Email;
+    var subject = "RiwiEmplea - Usuario creado!";
+    var emailCustomer = user.Email;
 
-                    await _emailRepository.SendEmailAsync(emailCustomer, subject, mensajeCustomer);
-            return user;
-        }
+    await _emailRepository.SendEmailAsync(emailCustomer, subject, mensajeCustomer);
+    return user;
+}
+
 
         public async Task<User> UpdateUserAsync(int id, UsersDTO userDTO)
         {
@@ -82,15 +82,9 @@ namespace RiwiEmplea.Applications.Services.Repositories
             return userToUpdate;
         }
 
-        // public async Task<User> DeleteUserAsync(int id)
-        // {
-        //     var user = await _context.Users.FirstOrDefaultAsync(c => c.Id == id);
-        //     if (user != null)
-        //     {
-        //         user.Status = "inactive";
-        //         await _context.SaveChangesAsync();
-        //     }
-        //     return user;
-        // }
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        }
     }
 }

@@ -54,7 +54,7 @@
                     try
                     {
                         // Establecer el valor de RoleId
-                        userDTO.RoleId = "2";
+                        userDTO.RoleId =2;
 
                         var createdUser = await _usersRepository.CreateUserAsync(userDTO);
                         return RedirectToAction("Details", "Details", new { id = createdUser.Id });

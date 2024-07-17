@@ -15,14 +15,13 @@ namespace CouponsV2.Application.Services.Emails
             _emailSettings = emailSettings.Value;
         }
 
-       public async Task SendEmailAsync(string toEmail, string subject, string body)
+        public async Task SendEmailAsync(string toEmail, string subject, string body)
         {
             var emailMessage = new MimeMessage();
             emailMessage.From.Add(new MailboxAddress(_emailSettings.SenderName, _emailSettings.SenderEmail));
             emailMessage.To.Add(new MailboxAddress("", toEmail));
             emailMessage.Subject = subject;
 
-            // Cambiar el tipo de contenido a HTML
             var bodyBuilder = new BodyBuilder { HtmlBody = body };
             emailMessage.Body = bodyBuilder.ToMessageBody();
 
@@ -34,6 +33,5 @@ namespace CouponsV2.Application.Services.Emails
                 await client.DisconnectAsync(true);
             }
         }
-
     }
 }
