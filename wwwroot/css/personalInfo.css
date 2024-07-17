@@ -1,0 +1,212 @@
+    /* CSS */
+
+    #search-input{
+        width: 20% !important;
+    }
+
+    .profile-group{
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-around !important;
+    }
+
+    .profile-group label{
+        text-align: center !important;
+    }
+
+    .profile-group textarea{
+        width: 80% !important;
+    }
+
+
+    .border{
+        border-radius: 10px !important;
+        width: 80% !important;
+        margin: auto !important;
+        margin-bottom: 20px !important;
+    }
+
+    .input-group-text {
+        cursor: pointer;
+    }
+
+    .form-control{
+        padding-left: 15px !important;
+        width: 60%3;
+    }
+
+    .input-group .form-control {
+        border-right: 0;
+
+    }
+
+    .form-group{
+        margin-left: 10px;
+    }
+
+    .form-group input{
+        padding-left: 20px !important;
+    }
+
+    .input-group .input-group-append .input-group-text {
+        background: white;
+        /* border: 1px solid  black; */
+        /* border-left: 0; */
+    }
+
+
+    .container h2{
+        text-align: center;
+        margin: auto;
+    }
+
+    form{
+        width: 80%;
+        height: 100%;
+        margin:auto;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #personalInformationContainer{
+        width: 100%;
+        
+    }
+
+    .personal-Information-group{
+        width: 100%;
+        height: 100%;
+        margin:auto;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .photo-container{
+        width: 20%;
+    }
+
+    .container-personal-info-right{
+        width: 70%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container-personal-info-right input{
+        width: 70% !important;
+    }
+
+    .photo-container{
+        width: 200px;
+        height: 200px;
+        border-radius: 100%;
+        background-color: aqua;
+        border: 1px solid black;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .form-control-file{
+        display: inline-block;
+        border: 1px;
+    }
+
+    .label-photo{
+        width: 100%;
+    }
+
+    .custom-file-upload {
+        display: inline-block;
+        cursor: pointer;
+        padding: 2px;
+        font-size: 10px;
+        color: white;
+        background-color: #007bff;
+        border: 1px solid #007bff;
+        border-radius: 50%;
+        width: 50px !important;
+        height: 50px !important;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
+    .custom-file-upload:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    .custom-file-upload{
+        position: absolute;
+        bottom: 0px;
+        right: 20px;
+    }
+
+    .form-data input, .form-data textarea, .form-data select, .form-data label{
+        width: 75%;
+        border: none !important;
+        margin:auto !important;
+        padding: 6px;
+    }
+
+    .form-data label{
+        text-align: center !important;
+        width: 100%;
+    }
+
+
+    .description-container{
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        justify-content: space-around;
+        /* align-items: center; */
+    }
+
+    /* .form-data textarea{
+        width: 50%;
+        */
+    /* } */
+
+    /* #personalInformationContainer{
+        width: auto;
+        margin-bottom: 20px !important;
+    } */
+
+
+
+    #personalInformationContainer label{
+        font-style: italic;
+        width: 100%;
+        margin-left: 30px;
+
+    }
+
+    .input-group-append{
+        margin-left: 5px !important;
+        border-radius: 5px !important;
+    }
+
+    .container-group-profile{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: auto;
+        width: 83%;
+        height: 100%;
+    }
+
+    .group-form-control{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .edited {
+        border-color: green !important; /* Cambia el color del borde */
+        background-color: lightgreen; /* Cambia el color de fondo si lo prefieres */
+    }
