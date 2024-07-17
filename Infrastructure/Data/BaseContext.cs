@@ -14,7 +14,7 @@ namespace RiwiEmplea.Infrastructure.Data
         public DbSet<Skill> Skills { get; set; }
         public DbSet<WorkExperience> WorkExperiences { get; set; }
         public DbSet<Resume> Resumes { get; set; }
-        public DbSet<AcademicTrainings> AcademicTraining { get; set; }
+        public DbSet<AcademicTraining> AcademicTrainings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace RiwiEmplea.Models
 {
-    public class AcademicTrainings
+    public class AcademicTraining
     {
         public int Id { get; set; }
         public int ResumeId { get; set; }
@@ -14,5 +14,6 @@ namespace RiwiEmplea.Models
         public DateOnly StartDate { get; set; }
         public DateOnly EndDate { get; set; }
         public string? Description { get; set; }
+        public string? State { get; set; }
     }
 }

@@ -13,5 +13,6 @@ namespace RiwiEmplea.Models
         public string? PublicLink { get; set; }
         public string? AboutMy { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string? State { get; set; }
     }
 }
