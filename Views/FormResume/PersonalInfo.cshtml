@@ -1,9 +1,3 @@
-@model RiwiEmplea.Dtos.Users.UsersDTO
-
-@{
-    ViewData["Title"] = "Personal Info User";
-}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,354 +7,390 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/css/personalInfo.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="~/js/personalinfo.js"></script>
+    <style>
+        .edited {
+            border-color: green !important;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
         <h2 class="text-left">Formulario de Registro</h2>
         <form asp-action="Submit" method="post" enctype="multipart/form-data" class="form-data">
-
             <!-- Información Personal -->
             <h3 class="w-auto text-center">Información Personal</h3>
             <div id="personalInformationContainer" class="mb-3">
                 <div class="personal-Information-group border p-5">
-
                     <!-- Foto -->
                     <div class="form-group photo-container">
                         <label class="label-photo">Foto</label>
-                        <input type="file" class="-file d-none" id="photo" name="photo">
+                        <input type="file" class="file d-none" id="photo" name="photo">
                         <label class="custom-file-upload" for="photo">
-                            <i class="fa fa-plus"></i> 
+                            <i class="fa fa-plus"></i>
                         </label>
                     </div>
 
                     <div class="container-personal-info-right">
                         <!-- Nombre -->
-                        <div class="form-group input-group">
-                            <input type="text" class="" id="name" name="name" placeholder="Nombre">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-edit"></i></span>
+                        <div class="form-group group-form-control">
+                            <label for="name">Nombre</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="" disabled>
+                                <div class="input-group-append">
+                                    <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                    <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Fecha de nacimiento -->
-                        <div class="form-group input-group">
-                            <input type="date" class="" id="birthDate" name="birthDate" required>
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-edit"></i></span>
+                        <div class="form-group group-form-control">
+                            <label for="birthDate">Fecha de nacimiento</label>
+                            <div class="input-group">
+                                <input type="date" class="form-control" id="birthDate" name="birthDate" required disabled>
+                                <div class="input-group-append">
+                                    <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                    <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Ciudad -->
-                        <div class="form-group input-group">
-                            <input type="text" class="" id="city" name="city" placeholder="Ciudad" required>
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-edit"></i></span>
+                        <div class="form-group group-form-control">
+                            <label for="city">Ciudad de residencia</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="city" name="city" placeholder="" required disabled>
+                                <div class="input-group-append">
+                                    <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                    <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Correo -->
-                        <div class="form-group input-group">
-                            <input type="email" class="" id="email" name="email" placeholder="Correo" required>
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-edit"></i></span>
+                        <div class="form-group group-form-control">
+                            <label for="email">Correo</label>
+                            <div class="input-group">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="" required disabled>
+                                <div class="input-group-append">
+                                    <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                    <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Celular -->
-                        <div class="form-group input-group">
-                            <input type="tel" class="" id="phone" name="phone" placeholder="Celular" required>
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-edit"></i></span>
+                        <div class="form-group group-form-control">
+                            <label for="phone">Celular</label>
+                            <div class="input-group">
+                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="" required disabled>
+                                <div class="input-group-append">
+                                    <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                    <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
+
             <!-- Sobre Mi - Perfil -->
             <div class="profile-description-group border p-5 mb-3 mt-3">
-                <div class="form-group profile-group">
+                <div class="form-group group-form-control">
                     <label for="profile">Sobre Mi - Perfil</label>
-                    <div class="container-group-profile">
-                        <textarea class="" id="profile" name="profile" rows="3"></textarea>
+                    <div class="input-group">
+                        <textarea class="form-control" id="profile" name="profile" rows="3" placeholder="Perfil profesional..." disabled></textarea>
                         <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
+                            <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                            <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <button type="button" class="btn btn-primary mt-3 mb-3" onclick="addPersonalData()">Agregar Información Personal</button>
 
             <!-- Experiencias Profesionales -->
             <h3 class="text-center">Experiencias Profesionales</h3>
             <div id="professionalExperienceContainer">
                 <div class="experience-group border p-5 mb-3">
-                    <div class="form-group input-group">
-                        <input type="text" class="" id="company" name="experience[0].company" placeholder="Compañía" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
+                    <div class="form-group group-form-control">
+                        <label for="company">Compañía</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="company" name="experience[0].company" placeholder="" required disabled>
+                            <div class="input-group-append">
+                                <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group input-group">
-                        <input type="text" class="" id="position" name="experience[0].position" placeholder="Cargo" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
+                    <div class="form-group group-form-control">
+                        <label for="position">Cargo</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="position" name="experience[0].position" placeholder="" required disabled>
+                            <div class="input-group-append">
+                                <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group input-group">
-                        <input type="date" class="" id="startDate" name="experience[0].startDate" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
+                    <div class="form-group group-form-control">
+                        <label for="startDate">Fecha de inicio</label>
+                        <div class="input-group">
+                            <input type="date" class="form-control" id="startDate" name="experience[0].startDate" required disabled>
+                            <div class="input-group-append">
+                                <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group input-group">
-                        <input type="date" class="" id="endDate" name="experience[0].endDate">
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
+                    <div class="form-group group-form-control">
+                        <label for="endDate">Fecha de fin</label>
+                        <div class="input-group">
+                            <input type="date" class="form-control" id="endDate" name="experience[0].endDate" disabled>
+                            <div class="input-group-append">
+                                <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group description-container">
+                    <div class="form-group group-form-control">
                         <label for="description">Descripción</label>
-                        <textarea class="" id="description" name="experience[0].description" rows="3"></textarea>
+                        <div class="input-group">
+                            <textarea class="form-control" id="description" name="experience[0].description" rows="3" placeholder="Breve descripción del trabajo" disabled></textarea>
+                            <div class="input-group-append">
+                                <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                            </div>
+                        </div>
                     </div>
+                     <!-- Botón de Eliminar -->
+                    <button type="button" class="btn btn-danger delete-btn ml-2" onclick="deleteExperienceGroup(this)">Eliminar</button>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary mt-3 mb-3" onclick="addExperience()">Agregar Experiencia</button>
+            <button type="button" class="btn btn-primary mt-3 mb-3 text-center" onclick="addExperience()">Agregar Experiencia</button>
 
             <!-- Formación Educativa -->
             <h3 class="text-center">Formación Educativa</h3>
             <div id="educationContainer">
                 <div class="education-group border p-5 mb-3">
-                    <div class="form-group input-group">
-                        <input type="text" class="" id="institution" name="education[0].institution" placeholder="Institución" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
+                    <div class="form-group group-form-control">
+                        <label for="institution">Institución</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="institution" name="education[0].institution" placeholder="" required disabled>
+                            <div class="input-group-append">
+                                <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group input-group">
-                        <input type="text" class="" id="degree" name="education[0].degree" placeholder="Título" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
+                    <div class="form-group group-form-control">
+                        <label for="degree">Título</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="degree" name="education[0].degree" placeholder="" required disabled>
+                            <div class="input-group-append">
+                                <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group input-group">
-                        <input type="date" class="" id="eduStartDate" name="education[0].startDate" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
+                    <div class="form-group group-form-control">
+                        <label for="graduationDate">Fecha de Graduación</label>
+                        <div class="input-group">
+                            <input type="date" class="form-control" id="graduationDate" name="education[0].graduationDate" required disabled>
+                            <div class="input-group-append">
+                                <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group input-group">
-                        <input type="date" class="" id="eduEndDate" name="education[0].endDate">
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
+                    <div class="form-group group-form-control">
+                        <label for="educationDescription">Descripción</label>
+                        <div class="input-group">
+                            <textarea class="form-control" id="educationDescription" name="education[0].description" rows="3" placeholder="Breve descripción de la formación" disabled></textarea>
+                            <div class="input-group-append">
+                                <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group description-container">
-                        <label for="eduDescription">Descripción</label>
-                        <textarea class="" id="eduDescription" name="education[0].description" rows="3"></textarea>
-                    </div>
+                     <!-- Botón de Eliminar -->
+                    <button type="button" class="btn btn-danger delete-btn ml-2" onclick="deleteEducationGroup(this)">Eliminar</button>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary mt-3 mb-3" onclick="addEducation()">Agregar Educación</button>
+            <button type="button" class="btn btn-primary mt-3 mb-3 text-center" onclick="addEducation()">Agregar Formación</button>
 
-            <!-- Competencias Humanas -->
-            <h3 class="text-center">Competencias Humanas</h3>
-            <div id="softSkillsContainer">
+            <!-- Competencias -->
+            <h3 class="text-center">Competencias</h3>
+            <div id="skillsContainer">
                 <div class="skill-group border p-5 mb-3">
-                    <div class="form-group input-group">
-                        <input type="text" class="" id="softSkill" name="softSkills[0].skill" placeholder="Habilidad" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
+                    <div class="form-group group-form-control">
+                        <label for="skill">Habilidad</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="skill" name="skills[0].skill" placeholder="" required disabled>
+                            <div class="input-group-append">
+                                <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group input-group">
-                        <select class="" id="softSkillLevel" name="softSkills[0].level" required>
-                            <option value="Basico">Básico</option>
-                            <option value="Intermedio">Intermedio</option>
-                            <option value="Avanzado">Avanzado</option>
-                        </select>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
+                    <div class="form-group group-form-control">
+                        <label for="skillLevel">Nivel</label>
+                        <div class="input-group">
+                            <select class="form-control" id="skillLevel" name="skills[0].level" required disabled>
+                                <option value="Básico">Básico</option>
+                                <option value="Intermedio">Intermedio</option>
+                                <option value="Avanzado">Avanzado</option>
+                            </select>
+                            <div class="input-group-append">
+                                <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                            </div>
                         </div>
                     </div>
+                    <!-- Botón de Eliminar -->
+                    <button type="button" class="btn btn-danger delete-btn ml-2" onclick="deleteSkillGroup(this)">Eliminar</button>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary mt-3 mb-3" onclick="addSoftSkill()">Agregar Habilidad Humana</button>
+            <button type="button" class="btn btn-primary mt-3 mb-3 text-center" onclick="addSkill()">Agregar Habilidad</button>
 
-            <!-- Competencias Técnicas -->
-            <h3 class="text-center">Competencias Técnicas</h3>
-            <div id="techSkillsContainer">
-                <div class="skill-group border p-5 mb-3">
-                    <div class="form-group input-group">
-                        <input type="text" class="" id="techSkill" name="techSkills[0].skill" placeholder="Habilidad" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
-                        </div>
-                    </div>
-                    <div class="form-group input-group">
-                        <select class="" id="techSkillLevel" name="techSkills[0].level" required>
-                            <option value="Basico">Básico</option>
-                            <option value="Intermedio">Intermedio</option>
-                            <option value="Avanzado">Avanzado</option>
-                        </select>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button type="button" class="btn btn-primary mt-3 mb-3" onclick="addTechSkill()">Agregar Habilidad Técnica</button>
-
-            <!-- Botón de envío del formulario -->
-            <div class="form-group text-center mt-5 mb-5">
-                <button type="submit" class="btn btn-success">Enviar</button>
-            </div>
+            <button type="submit" class="btn btn-success text-center">Enviar</button>
         </form>
     </div>
+
+     <!-- Modal de confirmación para eliminar -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirmación de Eliminación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    No puedes eliminar este elemento si es el único.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
-        // JavaScript (personalInfo.js)
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".edit-btn").forEach(function(btn) {
+                btn.addEventListener("click", function() {
+                    const inputGroup = btn.closest(".input-group");
+                    const input = inputGroup.querySelector("input, textarea, select");
+                    input.removeAttribute("disabled");
+                    btn.classList.add("d-none");
+                    inputGroup.querySelector(".save-btn").classList.remove("d-none");
+                });
+            });
 
-        // Contador para las experiencias profesionales
-        let experienceCount = 1;
-        // Contador para la formación educativa
-        let educationCount = 1;
-        // Contador para las competencias humanas
-        let softSkillCount = 1;
-        // Contador para las competencias técnicas
-        let techSkillCount = 1;
+            document.querySelectorAll(".save-btn").forEach(function(btn) {
+                btn.addEventListener("click", function() {
+                    const inputGroup = btn.closest(".input-group");
+                    const input = inputGroup.querySelector("input, textarea, select");
+                    input.setAttribute("disabled", "true");
+                    input.classList.add("edited"); // Añadir clase edited aquí
+                    btn.classList.add("d-none");
+                    inputGroup.querySelector(".edit-btn").classList.remove("d-none");
+                    inputGroup.classList.add("edited"); // Añadir clase edited al input-group
+                });
+            });
 
-        // Función para añadir una nueva sección de experiencia profesional
+            document.querySelectorAll(".delete-btn").forEach(deleteButton => {
+                deleteButton.addEventListener('click', function() {
+                    deleteSkillGroup(this);
+                });
+            });
+        });
+
         function addExperience() {
-            let container = document.getElementById('professionalExperienceContainer');
-            let newExperience = `
-                <div class="experience-group border p-5 mb-3 mt-3">
-                    <div class="form-group input-group">
-                        <input type="text" class="form-control" id="company_${experienceCount}" name="experience[${experienceCount}].company" placeholder="Compañía" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
-                        </div>
-                    </div>
-                    <div class="form-group input-group">
-                        <input type="text" class="form-control" id="position_${experienceCount}" name="experience[${experienceCount}].position" placeholder="Cargo" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
-                        </div>
-                    </div>
-                    <div class="form-group input-group">
-                        <input type="date" class="form-control" id="startDate_${experienceCount}" name="experience[${experienceCount}].startDate" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
-                        </div>
-                    </div>
-                    <div class="form-group input-group">
-                        <input type="date" class="form-control" id="endDate_${experienceCount}" name="experience[${experienceCount}].endDate">
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="description_${experienceCount}">Descripción</label>
-                        <textarea class="form-control" id="description_${experienceCount}" name="experience[${experienceCount}].description" rows="3"></textarea>
-                    </div>
-                </div>`;
-            container.insertAdjacentHTML('beforeend', newExperience);
-            experienceCount++;
+            const container = document.getElementById("professionalExperienceContainer");
+            const newExperience = document.querySelector(".experience-group").cloneNode(true);
+            newExperience.querySelectorAll("input, textarea").forEach(input => {
+                input.value = "";
+                input.setAttribute("disabled", "true");
+            });
+            container.appendChild(newExperience);
+            // Reasignar eventos a los botones de editar y guardar
+            assignEditSaveEvents(newExperience);
         }
 
-        // Función para añadir una nueva sección de formación educativa
         function addEducation() {
-            let container = document.getElementById('educationContainer');
-            let newEducation = `
-                <div class="education-group border p-5 mb-3 mt-3">
-                    <div class="form-group input-group">
-                        <input type="text" class="form-control" id="institution_${educationCount}" name="education[${educationCount}].institution" placeholder="Institución" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
-                        </div>
-                    </div>
-                    <div class="form-group input-group">
-                        <input type="text" class="form-control" id="degree_${educationCount}" name="education[${educationCount}].degree" placeholder="Título" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
-                        </div>
-                    </div>
-                    <div class="form-group input-group">
-                        <input type="date" class="form-control" id="eduStartDate_${educationCount}" name="education[${educationCount}].startDate" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
-                        </div>
-                    </div>
-                    <div class="form-group input-group">
-                        <input type="date" class="form-control" id="eduEndDate_${educationCount}" name="education[${educationCount}].endDate">
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="eduDescription_${educationCount}">Descripción</label>
-                        <textarea class="form-control" id="eduDescription_${educationCount}" name="education[${educationCount}].description" rows="3"></textarea>
-                    </div>
-                </div>`;
-            container.insertAdjacentHTML('beforeend', newEducation);
-            educationCount++;
+            const container = document.getElementById("educationContainer");
+            const newEducation = document.querySelector(".education-group").cloneNode(true);
+            newEducation.querySelectorAll("input, textarea").forEach(input => {
+                input.value = "";
+                input.setAttribute("disabled", "true");
+            });
+            container.appendChild(newEducation);
+            // Reasignar eventos a los botones de editar y guardar
+            assignEditSaveEvents(newEducation);
         }
 
-        // Función para añadir una nueva competencia humana
-        function addSoftSkill() {
-            let container = document.getElementById('softSkillsContainer');
-            let newSoftSkill = `
-                <div class="skill-group border p-5 mb-3 mt-3">
-                    <div class="form-group input-group">
-                        <input type="text" class="form-control" id="softSkill_${softSkillCount}" name="softSkills[${softSkillCount}].skill" placeholder="Habilidad" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
-                        </div>
-                    </div>
-                    <div class="form-group input-group">
-                        <select class="form-control" id="softSkillLevel_${softSkillCount}" name="softSkills[${softSkillCount}].level" required>
-                            <option value="Basico">Básico</option>
-                            <option value="Intermedio">Intermedio</option>
-                            <option value="Avanzado">Avanzado</option>
-                        </select>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
-                        </div>
-                    </div>
-                </div>`;
-            container.insertAdjacentHTML('beforeend', newSoftSkill);
-            softSkillCount++;
+        function addSkill() {
+            const container = document.getElementById("skillsContainer");
+            const newSkill = document.querySelector(".skill-group").cloneNode(true);
+            newSkill.querySelectorAll("input, select").forEach(input => {
+                input.value = "";
+                input.setAttribute("disabled", "true");
+            });
+            container.appendChild(newSkill);
+            // Reasignar eventos a los botones de editar y guardar
+            assignEditSaveEvents(newSkill);
         }
 
-        // Función para añadir una nueva competencia técnica
-        function addTechSkill() {
-            let container = document.getElementById('techSkillsContainer');
-            let newTechSkill = `
-                <div class="skill-group border p-5 mb-3 mt-3">
-                    <div class="form-group input-group">
-                        <input type="text" class="form-control" id="techSkill_${techSkillCount}" name="techSkills[${techSkillCount}].skill" placeholder="Habilidad" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
-                        </div>
-                    </div>
-                    <div class="form-group input-group">
-                        <select class="form-control" id="techSkillLevel_${techSkillCount}" name="techSkills[${techSkillCount}].level" required>
-                            <option value="Basico">Básico</option>
-                            <option value="Intermedio">Intermedio</option>
-                            <option value="Avanzado">Avanzado</option>
-                        </select>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-edit"></i></span>
-                        </div>
-                    </div>
-                </div>`;
-            container.insertAdjacentHTML('beforeend', newTechSkill);
-            techSkillCount++;
+        function assignEditSaveEvents(element) {
+            element.querySelectorAll(".edit-btn").forEach(btn => {
+                btn.addEventListener("click", function() {
+                    const inputGroup = btn.closest(".input-group");
+                    const input = inputGroup.querySelector("input, textarea, select");
+                    input.removeAttribute("disabled");
+                    btn.classList.add("d-none");
+                    inputGroup.querySelector(".save-btn").classList.remove("d-none");
+                });
+            });
+
+            element.querySelectorAll(".save-btn").forEach(btn => {
+                btn.addEventListener("click", function() {
+                    const inputGroup = btn.closest(".input-group");
+                    const input = inputGroup.querySelector("input, textarea, select");
+                    input.setAttribute("disabled", "true");
+                    input.classList.add("edited");
+                    btn.classList.add("d-none");
+                    inputGroup.querySelector(".edit-btn").classList.remove("d-none");
+                    inputGroup.classList.add("edited"); // Añadir clase edited al input-group
+                });
+            });
         }
 
+        // Función para manejar el evento de clic en el botón de eliminar
+        function deleteSkillGroup(button) {
+            const group = button.closest(".skill-group, .education-group, .experience-group");
+            if (!group) return;
+
+            const container = group.parentNode;
+            const groups = container.querySelectorAll(".skill-group, .education-group, .experience-group");
+            if (groups.length > 1) {
+                group.remove();
+            } else {
+                $('#deleteModal').modal('show');
+            }
+        }
+
+        // Asignar evento al botón de agregar habilidades inicial
+        document.querySelector('.btn-primary').addEventListener('click', addSkill);
+
+        // Asignar eventos a los botones de eliminar
+        document.querySelectorAll('.delete-btn').forEach(deleteButton => {
+            deleteButton.addEventListener('click', function() {
+                deleteSkillGroup(this);
+            });
+        });
     </script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
-    <script src="~/js/personalInfo.js"></script>
+
 </body>
 </html>

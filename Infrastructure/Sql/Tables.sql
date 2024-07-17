@@ -9,10 +9,12 @@ CREATE TABLE Users (
 );
 
 ALTER TABLE Users ADD LastName VARCHAR(45);
+ALTER TABLE Users ADD State ENUM('Active', 'Inactive') DEFAULT 'Active';
 
 
 
-CREATE TABLE Resume (
+
+CREATE TABLE Resumes (
     Id INTEGER AUTO_INCREMENT PRIMARY KEY,
     UserId INT(11),
     BirthYear DATE,
@@ -22,6 +24,7 @@ CREATE TABLE Resume (
     Foreign Key (UserId) REFERENCES Users(Id)
 );
 
+ALTER TABLE Resumes ADD State ENUM('Active', 'Inactive') DEFAULT 'Active';
 
 CREATE TABLE Skills(
     Id INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -31,6 +34,7 @@ CREATE TABLE Skills(
     Foreign Key (ResumeId) REFERENCES Resume(Id)
 );
 
+ALTER TABLE Skills ADD State ENUM('Active', 'Inactive') DEFAULT 'Active';
 
 CREATE TABLE WorkExperiences (
     Id INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -43,6 +47,8 @@ CREATE TABLE WorkExperiences (
     Foreign Key (ResumeId) REFERENCES Resume(Id)
 );
 
+ALTER TABLE WorkExperiences ADD State ENUM('Active', 'Inactive') DEFAULT 'Active';
+
 CREATE TABLE AcademicTrainings (
     Id INTEGER AUTO_INCREMENT PRIMARY KEY,
     ResumeId INT(11),
@@ -54,6 +60,7 @@ CREATE TABLE AcademicTrainings (
     Foreign Key (ResumeId) REFERENCES Resume(Id)
 );
 
+ALTER TABLE AcademicTrainings ADD State ENUM('Active', 'Inactive') DEFAULT 'Active';
 
 CREATE TABLE Roles (
     Id INTEGER AUTO_INCREMENT PRIMARY KEY,
