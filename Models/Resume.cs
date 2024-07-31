@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RiwiEmplea.Models.Enums;
 
 namespace RiwiEmplea.Models
 {
@@ -12,7 +13,7 @@ namespace RiwiEmplea.Models
         public string? PublicLink { get; set; }
         public string? AboutMe { get; set; }
         public DateTime CreatedAt { get; set; }
-        public string? State { get; set; }
+        public StateEnum State { get; set; }
         public int UserId { get; set; }
     }
 }
