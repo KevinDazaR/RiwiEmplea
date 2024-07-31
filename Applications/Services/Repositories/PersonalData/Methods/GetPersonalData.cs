@@ -39,7 +39,7 @@ namespace RiwiEmplea.Applications.Services.Repositories.PersonalData.Methods
       if(userResume == null)
         return UserWithoutResume(user);
 
-      return await GetFullResumeDataAsync(user.Name, userResume);
+      return await GetFullResumeDataAsync(user.FullName, userResume);
     }
 
     public async Task<PersonalDataDTO> GetPersonalDataAsync()
@@ -50,7 +50,7 @@ namespace RiwiEmplea.Applications.Services.Repositories.PersonalData.Methods
     }
 
     private PersonalDataDTO UserWithoutResume(User user) 
-      => new() { FullName = user.Name };
+      => new() { FullName = user.FullName };
 
     private async Task<PersonalDataDTO> GetFullResumeDataAsync(string userName, Resume resume)
     {
