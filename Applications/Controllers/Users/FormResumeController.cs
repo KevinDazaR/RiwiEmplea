@@ -5,24 +5,25 @@
     using RiwiEmplea.Applications.Interfaces;
     using RiwiEmplea.Dtos.Users;
     using RiwiEmplea.Models;
+using RiwiEmplea.Dtos.PersonalData;
 
-    namespace RiwiEmplea.Applications.Controllers.Users
+namespace RiwiEmplea.Applications.Controllers.Users
     {
         public class FormResumeController : Controller
         {
-            private readonly IUsersRepository _usersRepository;
-            private readonly ILogger<FormResumeController> _logger;
+            private readonly IPersonalDataService _personalDataService;
 
-            public FormResumeController(IUsersRepository usersRepository, ILogger<FormResumeController> logger)
+            public FormResumeController(IPersonalDataService personalDataService)
             {
-                _usersRepository = usersRepository;
-                _logger = logger;
+                _personalDataService = personalDataService;
             }
 
            // GET: Details/Details
-            public IActionResult PersonalInfo()
+            public async Task<IActionResult> Index()
             {
-                return View();
+                PersonalDataDTO userData = await _personalDataService.GetPersonalDataAsync(1);
+
+                return View(userData);
             }
 
         }
