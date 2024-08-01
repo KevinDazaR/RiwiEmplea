@@ -83,8 +83,9 @@
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Name</th>
+                            <th>Full name</th>
                             <th>Email</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -95,8 +96,9 @@
                             {
                                 <tr>
                                     <td>@item.Id</td>
-                                    <td>@item.Name</td>
+                                    <td>@item.FullName</td>
                                     <td>@item.Email</td>
+                                    <td>@item.State</td>
                                     <td>
                                         <a href="#" class="btn btn-primary">Info</a>
                                     </td>
@@ -115,7 +117,6 @@
                     @* @Html.PagedListPager(Model, page => Url.Action("Index", new { pageNumber = page })) *@
                 </div>
             }
-             
         </main>
     </div>
 
