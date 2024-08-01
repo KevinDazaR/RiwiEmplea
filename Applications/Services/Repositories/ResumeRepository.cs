@@ -52,7 +52,7 @@ namespace RiwiEmplea.Applications.Services.Repositories
       {
         UserId = userId,
         CreatedAt = DateTime.Now,
-        AboutMy = ""
+        AboutMe = ""
       };
 
       return await AddResumeAsync(resume);

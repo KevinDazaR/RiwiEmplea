@@ -1,60 +1,61 @@
+-- Active: 1722462983270@@127.0.0.1@3306@bjfg41pkiuncnecnedjz
+CREATE TABLE Roles (
+    Id INT NOT NULL AUTO_INCREMENT,
+    Name VARCHAR(90) NOT NULL,
+    PRIMARY KEY (Id)
+);
+
 CREATE TABLE Users (
-    Id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    Name VARCHAR(45),
-    Email VARCHAR(45) UNIQUE,
-    Password VARCHAR(45),
-    GoogleId INT(11),
-    RoleId INT(11),
-    Foreign Key (RoleId) REFERENCES Roles(Id)
+    Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    FullName VARCHAR(125) NOT NULL,
+    Email VARCHAR(125) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    GoogleId INT,
+    State ENUM('Active', 'Inactive') DEFAULT 'Active',
+    RoleId INT,
+    FOREIGN KEY (RoleId) REFERENCES Roles(Id)
 );
-ALTER TABLE Users ADD LastName VARCHAR(45);
-ALTER TABLE Users ADD State ENUM('Active', 'Inactive') DEFAULT 'Active';
-
+-- Drop tables in order of dependencies to avoid foreign key constraint issues
 CREATE TABLE Resumes (
-    Id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    UserId INT(11),
-    BirthYear DATE,
+    Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Birthdate DATE NOT NULL,
     PublicLink VARCHAR(50),
-    AboutMy TEXT,
-    CreatedAt DATETIME,
-    State ENUM('Active', 'Inactive') DEFAULT('Active'),
-    Foreign Key (UserId) REFERENCES Users(Id)
+    AboutMe TEXT,
+    CreatedAt DATETIME NOT NULL,
+    State ENUM('Active', 'Inactive') DEFAULT 'Active',
+    UserId INT,
+    FOREIGN KEY (UserId) REFERENCES Users(Id)
 );
 
-CREATE TABLE Skills(
-    Id INTEGER AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE Skills (
+    Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(125) NOT NULL,
+    Level ENUM('Basic', 'Medium', 'Advanced') NOT NULL,
+    State ENUM('Active', 'Inactive') DEFAULT 'Active',
     ResumeId INT,
-    Ability VARCHAR(45),
-    Level ENUM('Basic', 'Medium', 'Advanced'),
-    State ENUM('Active', 'Inactive') DEFAULT('Active'),
-    Foreign Key (ResumeId) REFERENCES Resumes(Id)
+    FOREIGN KEY (ResumeId) REFERENCES Resumes(Id)
 );
 
 CREATE TABLE WorkExperiences (
-    Id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    ResumeId INT,
-    Company VARCHAR(45),
-    Position VARCHAR(50),
-    StartDate DATE,
+    Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Company VARCHAR(50) NOT NULL,
+    Position VARCHAR(50) NOT NULL,
+    Description VARCHAR(255),
+    StartDate DATE NOT NULL,
     EndDate DATE,
-    Description VARCHAR(60),
-    State ENUM('Active', 'Inactive') DEFAULT('Active'),
-    Foreign Key (ResumeId) REFERENCES Resumes(Id)
+    State ENUM('Active', 'Inactive') DEFAULT 'Active',
+    ResumeId INT,
+    FOREIGN KEY (ResumeId) REFERENCES Resumes(Id)
 );
 
 CREATE TABLE AcademicTrainings (
-    Id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    ResumeId INT,
-    Institution VARCHAR(60),
-    Title VARCHAR(45),
-    StartDate DATE,
+    Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Institution VARCHAR(60) NOT NULL,
+    Title VARCHAR(90) NOT NULL,
+    Description VARCHAR(255),
+    StartDate DATE NOT NULL,
     EndDate DATE,
-    Description VARCHAR(60),
-    State ENUM('Active', 'Inactive') DEFAULT('Active'),
-    Foreign Key (ResumeId) REFERENCES Resumes(Id)
-);
-
-CREATE TABLE Roles (
-    Id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    Name VARCHAR(45)
+    State ENUM('Active', 'Inactive') DEFAULT 'Active',
+    ResumeId INT,
+    FOREIGN KEY (ResumeId) REFERENCES Resumes(Id)
 );

@@ -28,6 +28,30 @@ namespace RiwiEmplea.Infrastructure.Data
                     .IsRequired();
                 // Configuración adicional para otros campos si es necesario
             });
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.State)
+                .HasConversion<string>();
+
+            modelBuilder.Entity<Resume>()
+                .Property(e => e.State)
+                .HasConversion<string>();
+
+            modelBuilder.Entity<Skill>()
+                .Property(e => e.State)
+                .HasConversion<string>();
+
+            modelBuilder.Entity<Skill>()
+                .Property(e => e.Level)
+                .HasConversion<string>();
+
+            modelBuilder.Entity<WorkExperience>()
+                .Property(e => e.State)
+                .HasConversion<string>();
+
+            modelBuilder.Entity<AcademicTraining>()
+                .Property(e => e.State)
+                .HasConversion<string>();
         }
     }
 }

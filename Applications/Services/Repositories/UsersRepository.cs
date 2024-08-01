@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using AutoMapper;
 using RiwiEmplea.Dtos.Users;
 using RiwiEmplea.Models;
@@ -50,7 +46,7 @@ public async Task<User> CreateUserAsync(UsersDTO userDTO)
 
     var user = new User
     {
-        Name = userDTO.Name,
+        FullName = userDTO.Name,
         Email = userDTO.Email,
         Password = userDTO.Password,
         RoleId = userDTO.RoleId  // Asegúrate de que esto esté configurado correctamente
