@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using RiwiEmplea.Applications.Interfaces.Repositories.Token;
 using RiwiEmplea.Infrastructure.Data;
@@ -24,7 +25,7 @@ namespace RiwiEmplea.Applications.Controllers.Users
         public async Task<IActionResult> Index([FromForm] User user)
         {
             /* Organizar mas adelante */
-            var usuario = _context.Users.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
+            User usuario = _context.Users.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
             if (usuario != null)
             {
                 string token = _tokenRepository.GetToken(user);
@@ -34,7 +35,6 @@ namespace RiwiEmplea.Applications.Controllers.Users
                     return Unauthorized();
                 };
 
-                var tokenEncrypt = BCrypt.Net.BCrypt.HashPassword(token);
 
                 var cookieOptions = new CookieOptions
                 {
@@ -43,7 +43,9 @@ namespace RiwiEmplea.Applications.Controllers.Users
                     Expires = DateTime.UtcNow.AddHours(1) // Establecer la expiración de la cookie
                 };
 
-                Response.Cookies.Append("jwtToken", tokenEncrypt, cookieOptions);
+                // var tokenEncrypt = BCrypt.Net.BCrypt.HashPassword(token);
+                // Response.Cookies.Append("jwtToken", tokenEncrypt, cookieOptions);
+                Response.Cookies.Append("jwtToken", token, cookieOptions);
 
                 return RedirectToAction("Index", "Home");
             }

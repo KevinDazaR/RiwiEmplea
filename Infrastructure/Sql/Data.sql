@@ -1,3 +1,4 @@
+-- Active: 1722468910909@@127.0.0.1@3306@bjfg41pkiuncnecnedjz
 -- Insert data into Roles
 INSERT INTO Roles (Name) VALUES 
 ('Staff'),
@@ -17,7 +18,7 @@ INSERT INTO Resumes (Birthdate, PublicLink, AboutMe, CreatedAt, State, UserId) V
 ('1992-02-02', 'http://example.com/janesmith', 'Project manager with 5 years experience', NOW(), 'Active', 2),
 ('1985-03-03', 'http://example.com/alicejohnson', 'HR specialist and recruiter', NOW(), 'Inactive', 3),
 ('1991-04-04', 'http://example.com/bobbrown', 'Senior developer with a focus on backend systems', NOW(), 'Active', 4),
-('1988-05-05', 'http://example.com/charliedavis', 'Project coordinator with a background in marketing', NOW(), 'Inactive', 4);
+('1988-05-05', 'http://example.com/charliedavis', 'Project coordinator with a background in marketing', NOW(), 'Inactive', 5);
 
 -- Insert data into Skills
 INSERT INTO Skills (Name, Level, State, ResumeId) VALUES 

@@ -14,7 +14,12 @@ namespace RiwiEmplea.Applications.Controllers.Users
             _logger = logger;
         }
 
-        public IActionResult Home()
+        // public IActionResult Index()
+        // {
+        //     return View();
+        // }
+
+        public IActionResult Index()
         {
             return View();
         }
