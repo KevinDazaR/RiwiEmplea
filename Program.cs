@@ -74,6 +74,8 @@ builder.Services.AddScoped<IResumeRepository, ResumeRepository>();
 builder.Services.AddScoped<IAcademicTrainingRepository, AcademicTrainingRepository>();
 builder.Services.AddScoped<IWorkExpirenceRepository, WorkExpirenceRepository>();
 builder.Services.AddScoped<ISkillsRepository, SkillsRepository>();
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+
 
 builder.Services.RegisterPersonalData();
 builder.Services.AddScoped<IPersonalDataService, PersonalDataService>();
