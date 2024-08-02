@@ -10,6 +10,9 @@ namespace RiwiEmplea.Applications.Utils.Profiles
         {
             CreateMap<UsersDTO, User>()
                 .ForMember(dest => dest.RoleId, opt => opt.MapFrom(src => src.RoleId));
+
+            CreateMap<User, UsersDTO>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.FullName));
         }
     }
 }

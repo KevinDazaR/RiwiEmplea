@@ -31,7 +31,7 @@ namespace RiwiEmplea.Applications.Services.Repositories.PersonalData.Methods
       await UpdateResume(userInfo.Resume);
       await UpdateAcademicTraining(userInfo.AcademicTrainings.ToList());
       await UpdateSkills(userInfo.Skills.ToList());
-      await UpdateWorkExpirences(userInfo.WorkExpirence.ToList());
+      await UpdateWorkExpirences(userInfo.WorkExpirences.ToList());
 
       return userInfo;
     }

@@ -1,6 +1,8 @@
+using AutoMapper;
 using RiwiEmplea.Applications.Interfaces;
 using RiwiEmplea.Applications.Interfaces.Repositories;
 using RiwiEmplea.Dtos.PersonalData;
+using RiwiEmplea.Dtos.Users;
 using RiwiEmplea.Models;
 
 namespace RiwiEmplea.Applications.Services.Repositories.PersonalData.Methods
@@ -12,12 +14,15 @@ namespace RiwiEmplea.Applications.Services.Repositories.PersonalData.Methods
     private readonly IAcademicTrainingRepository _academicTraining;
     private readonly IWorkExpirenceRepository _workExpirenceRepository;
     private readonly ISkillsRepository _skillsRepository;
+    private readonly IMapper _mapper;
+
     public GetPersonalData(
       IUsersRepository usersRepository,
       IResumeRepository resumeRepository,
       IAcademicTrainingRepository academicTrainingRepository,
       IWorkExpirenceRepository workExpirenceRepository,
-      ISkillsRepository skillsRepository
+      ISkillsRepository skillsRepository,
+      IMapper mapper
     )
     {
       _usersRepository = usersRepository;
@@ -25,11 +30,14 @@ namespace RiwiEmplea.Applications.Services.Repositories.PersonalData.Methods
       _academicTraining = academicTrainingRepository;
       _workExpirenceRepository = workExpirenceRepository;
       _skillsRepository = skillsRepository;
+      _mapper = mapper;
     }
     public async Task<PersonalDataDTO> GetPersonalDataAsync(int userId)
     {
 
       User user = await _usersRepository.GetUserByIdAsync(userId);
+
+      UsersDTO userDTO = _mapper.Map<UsersDTO>(user);
 
       if(user == null)
         return null;
@@ -37,9 +45,9 @@ namespace RiwiEmplea.Applications.Services.Repositories.PersonalData.Methods
       Resume userResume = await _resumeRepository.GetUserResumeAsync(userId);
 
       if(userResume == null)
-        return UserWithoutResume(user);
+        return UserWithoutResume(userDTO);
 
-      return await GetFullResumeDataAsync(user.FullName, userResume);
+      return await GetFullResumeDataAsync(userDTO, userResume);
     }
 
     public async Task<PersonalDataDTO> GetPersonalDataAsync()
@@ -49,17 +57,17 @@ namespace RiwiEmplea.Applications.Services.Repositories.PersonalData.Methods
       return userInfo;
     }
 
-    private PersonalDataDTO UserWithoutResume(User user) 
-      => new() { FullName = user.FullName };
+    private PersonalDataDTO UserWithoutResume(UsersDTO user) 
+      => new() { UsersDTO = user };
 
-    private async Task<PersonalDataDTO> GetFullResumeDataAsync(string userName, Resume resume)
+    private async Task<PersonalDataDTO> GetFullResumeDataAsync(UsersDTO user, Resume resume)
     {
       PersonalDataDTO userInfo = new()
       {
-        FullName = userName,
+        UsersDTO = user,
         Resume = resume,
         AcademicTrainings = await _academicTraining.GetUserAcademicTrainingsAsync(resume.Id),
-        WorkExpirence = await _workExpirenceRepository.GetUserWorkExpirenceAsync(resume.Id),
+        WorkExpirences = await _workExpirenceRepository.GetUserWorkExpirenceAsync(resume.Id),
         Skills = await _skillsRepository.GetUserSkillsAsync(resume.Id)
       };
       return userInfo;

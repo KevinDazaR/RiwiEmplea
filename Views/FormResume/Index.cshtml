@@ -16,6 +16,7 @@
 </head>
 <body>
 @model PersonalDataDTO
+@* @model PersonalDataDTO *@
 
     <div class="container mt-5">
         <h2 class="text-left">Formulario de Registro del Usuario</h2>
@@ -38,7 +39,7 @@
                         <div class="form-group group-form-control">
                             <label for="name">Nombre</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="" disabled>
+                                <input type="text" class="form-control" id="name" name="name" value="@Model.UsersDTO.Name" disabled>
                                 <div class="input-group-append">
                                     <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
                                     <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
@@ -74,19 +75,7 @@
                         <div class="form-group group-form-control">
                             <label for="email">Correo</label>
                             <div class="input-group">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="" required disabled>
-                                <div class="input-group-append">
-                                    <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
-                                    <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Celular -->
-                        <div class="form-group group-form-control">
-                            <label for="phone">Celular</label>
-                            <div class="input-group">
-                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="" required disabled>
+                                <input type="email" class="form-control" id="email" name="email" value="@Model.UsersDTO.Email" required disabled>
                                 <div class="input-group-append">
                                     <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
                                     <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
@@ -102,7 +91,8 @@
                 <div class="form-group group-form-control">
                     <label for="profile">Sobre Mi - Perfil</label>
                     <div class="input-group">
-                        <textarea class="form-control" id="profile" name="profile" rows="3" placeholder="Perfil profesional..." disabled></textarea>
+                        <textarea name='awesome'>@Model.Resume.AboutMe</textarea>
+                        @* <textarea class="form-control" id="profile" name="profile" rows="3" va="hello world!" disabled></textarea> *@
                         <div class="input-group-append">
                             <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
                             <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
@@ -113,62 +103,65 @@
 
             <!-- Experiencias Profesionales -->
             <h3 class="text-center">Experiencias Profesionales</h3>
-            <div id="professionalExperienceContainer">
-                <div class="experience-group border p-5 mb-3">
-                    <div class="form-group group-form-control">
-                        <label for="company">Compañía</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="company" name="experience[0].company" placeholder="" required disabled>
-                            <div class="input-group-append">
-                                <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
-                                <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+            @foreach (var workExpirence in @Model.WorkExpirences)
+            {
+                <div id="professionalExperienceContainer">
+                    <div class="experience-group border p-5 mb-3">
+                        <div class="form-group group-form-control">
+                            <label for="company">Compañía</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="company" name="experience[0].company" value="@workExpirence.Company" required disabled>
+                                <div class="input-group-append">
+                                    <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                    <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group group-form-control">
-                        <label for="position">Cargo</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="position" name="experience[0].position" placeholder="" required disabled>
-                            <div class="input-group-append">
-                                <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
-                                <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                        <div class="form-group group-form-control">
+                            <label for="position">Cargo</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="position" name="experience[0].position" value="@workExpirence.Position" required disabled>
+                                <div class="input-group-append">
+                                    <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                    <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group group-form-control">
-                        <label for="startDate">Fecha de inicio</label>
-                        <div class="input-group">
-                            <input type="date" class="form-control" id="startDate" name="experience[0].startDate" required disabled>
-                            <div class="input-group-append">
-                                <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
-                                <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                        <div class="form-group group-form-control">
+                            <label for="startDate">Fecha de inicio</label>
+                            <div class="input-group">
+                                <input type="date" class="form-control" id="startDate" name="experience[0].startDate" required disabled>
+                                <div class="input-group-append">
+                                    <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                    <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group group-form-control">
-                        <label for="endDate">Fecha de fin</label>
-                        <div class="input-group">
-                            <input type="date" class="form-control" id="endDate" name="experience[0].endDate" disabled>
-                            <div class="input-group-append">
-                                <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
-                                <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                        <div class="form-group group-form-control">
+                            <label for="endDate">Fecha de fin</label>
+                            <div class="input-group">
+                                <input type="date" class="form-control" id="endDate" name="experience[0].endDate" disabled>
+                                <div class="input-group-append">
+                                    <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                    <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group group-form-control">
-                        <label for="description">Descripción</label>
-                        <div class="input-group">
-                            <textarea class="form-control" id="description" name="experience[0].description" rows="3" placeholder="Breve descripción del trabajo" disabled></textarea>
-                            <div class="input-group-append">
-                                <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
-                                <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                        <div class="form-group group-form-control">
+                            <label for="description">Descripción</label>
+                            <div class="input-group">
+                                <textarea class="form-control" id="description" name="experience[0].description" rows="3" placeholder="Breve descripción del trabajo" disabled></textarea>
+                                <div class="input-group-append">
+                                    <span class="input-group-text edit-btn"><i class="fas fa-edit"></i></span>
+                                    <span class="input-group-text save-btn d-none"><i class="fas fa-save"></i></span>
+                                </div>
                             </div>
                         </div>
+                        <!-- Botón de Eliminar -->
+                        <button type="button" class="btn btn-danger delete-btn ml-2" onclick="deleteExperienceGroup(this)">Eliminar</button>
                     </div>
-                     <!-- Botón de Eliminar -->
-                    <button type="button" class="btn btn-danger delete-btn ml-2" onclick="deleteExperienceGroup(this)">Eliminar</button>
                 </div>
-            </div>
+            }
             <button type="button" class="btn btn-primary mt-3 mb-3 text-center" onclick="addExperience()">Agregar Experiencia</button>
 
             <!-- Formación Educativa -->
